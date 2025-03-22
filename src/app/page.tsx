@@ -116,7 +116,7 @@ export default function Home() {
       {/* Partners Section */}
       <section className="py-8 md:py-12 bg-white text-black">
         <div className="container mx-auto">
-          <p className="text-center text-gray-600 text-sm md:text-base mb-6 md:mb-8">Join 5,000+ companies already growing</p>
+          <p className="text-center text-gray-600 text-sm md:text-base mb-6 md:mb-8">Join 4,000+ companies already growing</p>
           <CompanyLogos />
         </div>
       </section>

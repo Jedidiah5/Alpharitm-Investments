@@ -1,37 +1,92 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function CompanyLogos() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const totalSlides = 2; // We'll show 3 logos per slide on mobile
+
+  const logos = [
+    { name: 'Layers' },
+    { name: 'Sisyphus' },
+    { name: 'Circooles' },
+    { name: 'Catalog' },
+    { name: 'Quotient' }
+  ];
+
+  const handleSwipe = (direction: number) => {
+    setCurrentSlide(prev => {
+      const next = prev + direction;
+      if (next < 0) return totalSlides - 1;
+      if (next >= totalSlides) return 0;
+      return next;
+    });
+  };
+
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 overflow-x-auto scrollbar-hide pb-0 md:overflow-x-visible">
-      <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-between items-center gap-6 md:gap-8 w-full min-w-[600px] md:min-w-0">
-        {/* First Logo - Layers */}
-        <div className="flex items-center gap-2 md:gap-3 shrink-0">
-          <div className="relative w-[32px] md:w-[40px] h-[32px] md:h-[40px] bg-gray-200 rounded-full opacity-0 animate-fade-in" />
-          <span className="text-xs md:text-sm text-gray-900 font-medium opacity-0 animate-fade-in [animation-delay:100ms] whitespace-nowrap">Layers</span>
+    <div className="w-full max-w-7xl mx-auto px-4">
+      {/* Desktop View */}
+      <div className="hidden md:flex md:flex-wrap justify-between items-center gap-8 w-full">
+        {logos.map((logo, index) => (
+          <div key={logo.name} className="flex items-center gap-3 shrink-0">
+            <div className="relative w-[40px] h-[40px] bg-gray-200 rounded-full opacity-0 animate-fade-in" style={{ animationDelay: `${index * 200}ms` }} />
+            <span className="text-sm text-gray-900 font-medium opacity-0 animate-fade-in whitespace-nowrap" style={{ animationDelay: `${(index * 200) + 100}ms` }}>{logo.name}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Mobile View with Carousel */}
+      <div className="md:hidden relative">
+        <div 
+          className="flex transition-transform duration-300 ease-in-out"
+          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+          onTouchStart={(e) => {
+            const touch = e.touches[0];
+            const startX = touch.clientX;
+            
+            const handleTouchMove = (e: TouchEvent) => {
+              const touch = e.touches[0];
+              const diff = startX - touch.clientX;
+              if (Math.abs(diff) > 50) {
+                handleSwipe(diff > 0 ? 1 : -1);
+                document.removeEventListener('touchmove', handleTouchMove);
+              }
+            };
+            
+            document.addEventListener('touchmove', handleTouchMove, { once: true });
+          }}
+        >
+          {/* First Slide */}
+          <div className="flex gap-6 min-w-full justify-center">
+            {logos.slice(0, 3).map((logo, index) => (
+              <div key={logo.name} className="flex items-center gap-2">
+                <div className="relative w-[32px] h-[32px] bg-gray-200 rounded-full opacity-0 animate-fade-in" style={{ animationDelay: `${index * 200}ms` }} />
+                <span className="text-xs text-gray-900 font-medium opacity-0 animate-fade-in whitespace-nowrap" style={{ animationDelay: `${(index * 200) + 100}ms` }}>{logo.name}</span>
+              </div>
+            ))}
+          </div>
+          {/* Second Slide */}
+          <div className="flex gap-6 min-w-full justify-center">
+            {logos.slice(3).map((logo, index) => (
+              <div key={logo.name} className="flex items-center gap-2">
+                <div className="relative w-[32px] h-[32px] bg-gray-200 rounded-full opacity-0 animate-fade-in" style={{ animationDelay: `${index * 200}ms` }} />
+                <span className="text-xs text-gray-900 font-medium opacity-0 animate-fade-in whitespace-nowrap" style={{ animationDelay: `${(index * 200) + 100}ms` }}>{logo.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Second Logo - Sisyphus */}
-        <div className="flex items-center gap-2 md:gap-3 shrink-0">
-          <div className="relative w-[32px] md:w-[40px] h-[32px] md:h-[40px] bg-gray-200 rounded-full opacity-0 animate-fade-in [animation-delay:200ms]" />
-          <span className="text-xs md:text-sm text-gray-900 font-medium opacity-0 animate-fade-in [animation-delay:300ms] whitespace-nowrap">Sisyphus</span>
-        </div>
-
-        {/* Third Logo - Circooles */}
-        <div className="flex items-center gap-2 md:gap-3 shrink-0">
-          <div className="relative w-[32px] md:w-[40px] h-[32px] md:h-[40px] bg-gray-200 rounded-full opacity-0 animate-fade-in [animation-delay:400ms]" />
-          <span className="text-xs md:text-sm text-gray-900 font-medium opacity-0 animate-fade-in [animation-delay:500ms] whitespace-nowrap">Circooles</span>
-        </div>
-
-        {/* Fourth Logo - Catalog */}
-        <div className="flex items-center gap-2 md:gap-3 shrink-0">
-          <div className="relative w-[32px] md:w-[40px] h-[32px] md:h-[40px] bg-gray-200 rounded-full opacity-0 animate-fade-in [animation-delay:600ms]" />
-          <span className="text-xs md:text-sm text-gray-900 font-medium opacity-0 animate-fade-in [animation-delay:700ms] whitespace-nowrap">Catalog</span>
-        </div>
-
-        {/* Fifth Logo - Quotient */}
-        <div className="flex items-center gap-2 md:gap-3 shrink-0">
-          <div className="relative w-[32px] md:w-[40px] h-[32px] md:h-[40px] bg-gray-200 rounded-full opacity-0 animate-fade-in [animation-delay:800ms]" />
-          <span className="text-xs md:text-sm text-gray-900 font-medium opacity-0 animate-fade-in [animation-delay:900ms] whitespace-nowrap">Quotient</span>
+        {/* Carousel Dots */}
+        <div className="flex justify-center gap-2 mt-4">
+          {[...Array(totalSlides)].map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                currentSlide === index ? 'bg-[#03248b] w-4' : 'bg-gray-300'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
     </div>
