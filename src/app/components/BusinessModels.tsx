@@ -129,23 +129,27 @@ export default function BusinessModels() {
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 md:mb-12">
-          {tabs.map((tab, index) => (
-            <motion.button
-              key={tab.id}
-              onClick={() => handleTabClick(index)}
-              className={`px-4 md:px-6 py-1.5 md:py-2 rounded-full transition-all duration-300 text-xs md:text-sm font-medium ${
-                index === activeIndex
-                  ? 'bg-[#03248b] text-white shadow-lg scale-105'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
-              whileHover={{ scale: index === activeIndex ? 1.05 : 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            >
-              {tab.label}
-            </motion.button>
-          ))}
+        <div className="flex flex-nowrap md:flex-wrap overflow-x-auto scrollbar-hide gap-2 md:gap-3 mb-8 md:mb-12 pb-2 md:pb-0 justify-center">
+          <div className="inline-flex gap-2 md:gap-3">
+            {tabs.map((tab, index) => (
+              <motion.button
+                key={tab.id}
+                onClick={() => handleTabClick(index)}
+                className={`
+                  px-4 py-2 rounded-md text-sm whitespace-nowrap transition-all duration-300
+                  ${index === activeIndex 
+                    ? 'bg-[#03248b] text-white font-medium'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }
+                `}
+                whileHover={{ scale: index === activeIndex ? 1.05 : 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                {tab.label}
+              </motion.button>
+            ))}
+          </div>
         </div>
 
         {/* Carousel */}
