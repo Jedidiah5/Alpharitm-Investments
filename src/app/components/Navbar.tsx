@@ -125,25 +125,25 @@ export default function Navbar() {
                     {item}
                   </motion.a>
                 ))}
-                <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
+                <div className="flex flex-col items-center gap-3 pt-4 border-t border-white/10">
                   <motion.button 
-                    className="text-white transition text-sm font-medium border border-white/30 px-4 py-1.5 rounded-md"
+                    className="w-[60%] text-white transition text-sm font-medium border border-white/30 px-4 py-2.5 rounded-md"
                     whileHover={{ 
-                      scale: 1.05, 
+                      scale: 1.02, 
                       boxShadow: "0px 5px 15px rgba(255, 255, 255, 0.2)"
                     }}
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ scale: 0.98 }}
                     transition={buttonSpringTransition}
                   >
                     Login
                   </motion.button>
                   <motion.button 
-                    className="whitespace-nowrap bg-white text-[#03248b] px-6 py-1.5 rounded-md text-sm font-medium"
+                    className="w-[60%] whitespace-nowrap bg-white text-[#03248b] px-4 py-2.5 rounded-md text-sm font-medium"
                     whileHover={{ 
-                      scale: 1.05, 
+                      scale: 1.02, 
                       boxShadow: "0px 5px 15px rgba(255, 255, 255, 0.2)"
                     }}
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ scale: 0.98 }}
                     transition={buttonSpringTransition}
                   >
                     Get Started Now
