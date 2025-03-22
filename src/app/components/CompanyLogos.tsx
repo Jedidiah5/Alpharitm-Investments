@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export default function CompanyLogos() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const totalSlides = 2; // We'll show 3 logos per slide on mobile
+  const totalSlides = 2;
 
   const logos = [
     { name: 'Layers' },
@@ -35,9 +35,9 @@ export default function CompanyLogos() {
       </div>
 
       {/* Mobile View with Carousel */}
-      <div className="md:hidden relative">
+      <div className="md:hidden relative w-full overflow-hidden">
         <div 
-          className="flex transition-transform duration-300 ease-in-out"
+          className="flex transition-transform duration-300 ease-in-out w-full"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
           onTouchStart={(e) => {
             const touch = e.touches[0];
@@ -56,22 +56,27 @@ export default function CompanyLogos() {
           }}
         >
           {/* First Slide */}
-          <div className="flex gap-6 min-w-full justify-center">
-            {logos.slice(0, 3).map((logo, index) => (
-              <div key={logo.name} className="flex items-center gap-2">
-                <div className="relative w-[32px] h-[32px] bg-gray-200 rounded-full opacity-0 animate-fade-in" style={{ animationDelay: `${index * 200}ms` }} />
-                <span className="text-xs text-gray-900 font-medium opacity-0 animate-fade-in whitespace-nowrap" style={{ animationDelay: `${(index * 200) + 100}ms` }}>{logo.name}</span>
-              </div>
-            ))}
+          <div className="flex min-w-full px-4">
+            <div className="flex justify-center gap-4 w-full">
+              {logos.slice(0, 3).map((logo, index) => (
+                <div key={logo.name} className="flex items-center gap-2 shrink-0">
+                  <div className="relative w-[28px] h-[28px] bg-gray-200 rounded-full opacity-0 animate-fade-in" style={{ animationDelay: `${index * 200}ms` }} />
+                  <span className="text-xs text-gray-900 font-medium opacity-0 animate-fade-in whitespace-nowrap" style={{ animationDelay: `${(index * 200) + 100}ms` }}>{logo.name}</span>
+                </div>
+              ))}
+            </div>
           </div>
+
           {/* Second Slide */}
-          <div className="flex gap-6 min-w-full justify-center">
-            {logos.slice(3).map((logo, index) => (
-              <div key={logo.name} className="flex items-center gap-2">
-                <div className="relative w-[32px] h-[32px] bg-gray-200 rounded-full opacity-0 animate-fade-in" style={{ animationDelay: `${index * 200}ms` }} />
-                <span className="text-xs text-gray-900 font-medium opacity-0 animate-fade-in whitespace-nowrap" style={{ animationDelay: `${(index * 200) + 100}ms` }}>{logo.name}</span>
-              </div>
-            ))}
+          <div className="flex min-w-full px-4">
+            <div className="flex justify-center gap-4 w-full">
+              {logos.slice(3).map((logo, index) => (
+                <div key={logo.name} className="flex items-center gap-2 shrink-0">
+                  <div className="relative w-[28px] h-[28px] bg-gray-200 rounded-full opacity-0 animate-fade-in" style={{ animationDelay: `${index * 200}ms` }} />
+                  <span className="text-xs text-gray-900 font-medium opacity-0 animate-fade-in whitespace-nowrap" style={{ animationDelay: `${(index * 200) + 100}ms` }}>{logo.name}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
